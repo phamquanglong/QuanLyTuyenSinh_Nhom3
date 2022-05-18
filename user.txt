@@ -1,0 +1,5 @@
+admin$admin$1234567
+user$user$1234567
+admin$minh$1234567
+user$manhdepgai$password
+admin$quantrivien$password
