@@ -13,6 +13,18 @@ public class ThiSinh {
     public String hoTen;
     public String diaChi;
     public String uuTien;
+    public String khoiThi;
+
+    public ThiSinh() {
+    }
+
+    public ThiSinh(String SBD, String hoTen, String diaChi, String uuTien, String khoiThi) {
+        this.SBD = SBD;
+        this.hoTen = hoTen;
+        this.diaChi = diaChi;
+        this.uuTien = uuTien;
+        this.khoiThi = khoiThi;
+    }
 
     public String getSBD() {
         return SBD;
@@ -45,6 +57,12 @@ public class ThiSinh {
     public void setUuTien(String uuTien) {
         this.uuTien = uuTien;
     }
-    
-    
+
+    public String getKhoiThi() {
+        return khoiThi;
+    }
+
+    public void setKhoiThi(String khoiThi) {
+        this.khoiThi = khoiThi;
+    }
 }
