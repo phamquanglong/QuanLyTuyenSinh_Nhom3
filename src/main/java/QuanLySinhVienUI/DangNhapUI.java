@@ -168,15 +168,20 @@ public class DangNhapUI extends javax.swing.JFrame {
                 while ((check = br.readLine()) != null) {
                     String obj[] = check.split("\\$");
                     if ((obj[1].equals(userName)) && (obj[2].equals(passWord))) {
+                        QLTS_Nhom3 Cur = new QLTS_Nhom3();
                         if (obj[0].equals("admin")) {
                             JOptionPane.showMessageDialog(frame, "Đăng nhập admin thành công!!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                             this.dispose();
-                            new QLTS_Nhom3().setVisible(true);
+                            Cur.setVisible(true);
+                            Cur.txtTenTK.setText(userName);
+                            Cur.txtLoaiTK.setText("Quản trị viên");
                             break;
                         } else {
                             JOptionPane.showMessageDialog(frame, "Đăng nhập user thành công!!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                             this.dispose();
-                            new QLTS_Nhom3().setVisible(true);
+                            Cur.setVisible(true);
+                            Cur.txtTenTK.setText(userName);
+                            Cur.txtLoaiTK.setText("Người dùng");
                             break;
                         }
 

@@ -522,8 +522,9 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label;
     private javax.swing.JTable table;
-    private javax.swing.JLabel txtLoaiTK;
+
     private javax.swing.JTextField txtSearch;
-    private javax.swing.JLabel txtTenTK;
+    public javax.swing.JLabel txtTenTK;
+    public javax.swing.JLabel txtLoaiTK;
     // End of variables declaration//GEN-END:variables
 }
