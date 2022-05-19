@@ -201,7 +201,11 @@ public class ThemThiSinhMoiUI extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new QLTS_Nhom3().setVisible(true);
+        QLTS_Nhom3 qlts = new QLTS_Nhom3();
+        qlts.setVisible(true);
+        qlts.btnThemThiSinhMoi.setVisible(false);
+        qlts.btnSua.setVisible(false);
+        qlts.btnXoa.setVisible(false);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     /**

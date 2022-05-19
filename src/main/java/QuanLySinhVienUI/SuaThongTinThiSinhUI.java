@@ -18,11 +18,11 @@ import javax.swing.JOptionPane;
  *
  * @author phamquanglong51
  */
-public class SuaThongTinThiSinh extends javax.swing.JFrame {
+public class SuaThongTinThiSinhUI extends javax.swing.JFrame {
 
     private String dataContructor;
     PreparedStatement pst = null;
-    public SuaThongTinThiSinh(String dataContructor){
+    public SuaThongTinThiSinhUI(String dataContructor){
         initComponents();
         
         try {
@@ -39,13 +39,13 @@ public class SuaThongTinThiSinh extends javax.swing.JFrame {
                 cbKhoi.setSelectedItem(rs.getObject(5));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(SuaThongTinThiSinh.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SuaThongTinThiSinhUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     /**
      * Creates new form SuaThongTinThiSinh
      */
-    public SuaThongTinThiSinh() {
+    public SuaThongTinThiSinhUI() {
     }
 
     /**
@@ -225,7 +225,11 @@ public class SuaThongTinThiSinh extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new QLTS_Nhom3().setVisible(true);
+        QLTS_Nhom3 qlts = new QLTS_Nhom3();
+        qlts.setVisible(true);
+        qlts.btnThemThiSinhMoi.setVisible(false);
+        qlts.btnSua.setVisible(false);
+        qlts.btnXoa.setVisible(false);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     /**
@@ -245,21 +249,22 @@ public class SuaThongTinThiSinh extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SuaThongTinThiSinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaThongTinThiSinhUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SuaThongTinThiSinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaThongTinThiSinhUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SuaThongTinThiSinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaThongTinThiSinhUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SuaThongTinThiSinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaThongTinThiSinhUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new SuaThongTinThiSinh().setVisible(true);
+                new SuaThongTinThiSinhUI().setVisible(true);
             }
         });
     }
