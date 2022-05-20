@@ -29,8 +29,10 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     PreparedStatement pst = null;
     JFrame frame = new JFrame();
     DefaultTableModel tableModel;
-    ArrayList<ThiSinh> alist = new ArrayList<>();
+    ArrayList<ThiSinh> alist;
     public String[] data;
+    XSSFWorkbook wb = new XSSFWorkbook();
+    XSSFSheet sheet = wb.createSheet("Thí sinh");
 
     public QLTS_Nhom3() {
     }
@@ -61,17 +63,16 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
             Logger.getLogger(QLTS_Nhom3.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public QLTS_Nhom3(String[] data) {
         this.data = data;
-        if (data[0].contains("user")){
+        if (data[0].contains("user")) {
             initComponents();
             btnThemThiSinhMoi.setVisible(false);
             btnSua.setVisible(false);
             btnXoa.setVisible(false);
             txtLoaiTK.setText("Người dùng");
-        }
-        else {
+        } else {
             initComponents();
             btnThemThiSinhMoi.setBackground(new Colors().getPrimaryColor());
             btnSua.setBackground(new Colors().getWarning());
@@ -361,6 +362,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
 
     public void sortByKhoi(String khoi) {
         alist = new ArrayList<>();
+        sheet = wb.createSheet(khoi);
         try {
             Connection con = DBConnection.getConnection();
             tableModel.setRowCount(0);
@@ -499,14 +501,13 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
         // TODO add your handling code here:
         try {
-            XSSFWorkbook wb = new XSSFWorkbook();
-            XSSFSheet sheet = wb.createSheet("Thí sinh");
+                
             XSSFRow row = null;
             Cell cell = null;
             row = sheet.createRow(2);
             cell = row.createCell(2, CellType.STRING);
             cell.setCellValue("Tổng số: " + alist.size());
-            
+
             row = sheet.createRow(3);
             //Header
             cell = row.createCell(0, CellType.STRING);
