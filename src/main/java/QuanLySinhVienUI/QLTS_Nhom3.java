@@ -33,7 +33,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     public String[] data;
     XSSFWorkbook wb = new XSSFWorkbook();
     XSSFSheet sheet = wb.createSheet("Thí sinh");
-
+    int tongSo;
     public QLTS_Nhom3() {
     }
 
@@ -58,7 +58,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
                 ThiSinh ts = new ThiSinh(SBD, hoTen, diaChi, uuTien, khoiThi);
                 alist.add(ts);
             }
-
+            tongSo = alist.size();
         } catch (SQLException ex) {
             Logger.getLogger(QLTS_Nhom3.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -501,7 +501,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
         // TODO add your handling code here:
         try {
-                
+            int i;
             XSSFRow row = null;
             Cell cell = null;
             row = sheet.createRow(2);
@@ -528,7 +528,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
             cell = row.createCell(5, CellType.STRING);
             cell.setCellValue("Khối thi");
 
-            for (int i = 0; i < alist.size(); i++) {
+            for (i = 0; i < alist.size(); i++) {
                 row = sheet.createRow(4 + i);
 
                 cell = row.createCell(0, CellType.NUMERIC);
@@ -550,7 +550,10 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
                 cell.setCellValue(alist.get(i).getKhoiThi());
 
             }
-
+            float t =(float)alist.size()/tongSo*100;
+            row = sheet.createRow(5+i);
+            cell = row.createCell(5, CellType.STRING);
+            cell.setCellValue(t + "%");
             File f = new File("thisinh.xlsx");
             try {
                 FileOutputStream fos = new FileOutputStream(f);
