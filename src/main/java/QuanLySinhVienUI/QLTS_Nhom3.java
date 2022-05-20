@@ -33,6 +33,9 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     public String[] data;
     XSSFWorkbook wb = new XSSFWorkbook();
     XSSFSheet sheet = wb.createSheet("Thí sinh");
+    XSSFSheet sheetA = wb.createSheet("Khối A");
+    XSSFSheet sheetB = wb.createSheet("Khối B");
+    XSSFSheet sheetC = wb.createSheet("Khối C");
     int tongSo;
     public QLTS_Nhom3() {
     }
@@ -362,7 +365,9 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
 
     public void sortByKhoi(String khoi) {
         alist = new ArrayList<>();
-        sheet = wb.createSheet(khoi);
+        if (khoi.equals("Khối A")) sheet = sheetA;
+        else if (khoi.equals("Khối B")) sheet = sheetB;
+        else if (khoi.equals("Khối C")) sheet = sheetC;
         try {
             Connection con = DBConnection.getConnection();
             tableModel.setRowCount(0);
