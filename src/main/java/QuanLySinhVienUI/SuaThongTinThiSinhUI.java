@@ -21,8 +21,10 @@ import javax.swing.JOptionPane;
 public class SuaThongTinThiSinhUI extends javax.swing.JFrame {
 
     private String dataContructor;
+    public String[] data;
     PreparedStatement pst = null;
-    public SuaThongTinThiSinhUI(String dataContructor){
+    public SuaThongTinThiSinhUI(String dataContructor, String[] data){
+        this.data = data;
         initComponents();
         
         try {
@@ -214,7 +216,7 @@ public class SuaThongTinThiSinhUI extends javax.swing.JFrame {
             }
 
             this.dispose();
-            new QLTS_Nhom3().setVisible(true);
+            new QLTS_Nhom3(data).setVisible(true);
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
@@ -225,11 +227,7 @@ public class SuaThongTinThiSinhUI extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        QLTS_Nhom3 qlts = new QLTS_Nhom3();
-        qlts.setVisible(true);
-        qlts.btnThemThiSinhMoi.setVisible(false);
-        qlts.btnSua.setVisible(false);
-        qlts.btnXoa.setVisible(false);
+        new QLTS_Nhom3(data).setVisible(true);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     /**

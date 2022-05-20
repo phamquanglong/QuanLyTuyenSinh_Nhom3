@@ -30,6 +30,10 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     JFrame frame = new JFrame();
     DefaultTableModel tableModel;
     ArrayList<ThiSinh> alist = new ArrayList<>();
+    public String[] data;
+
+    public QLTS_Nhom3() {
+    }
 
     /**
      * Creates new form QLTS_Nhom3
@@ -57,18 +61,28 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
         }
     }
     
-    public QLTS_Nhom3() {
-        
-        initComponents();
+    public QLTS_Nhom3(String[] data) {
+        this.data = data;
+        if (data[0].contains("user")){
+            initComponents();
+            btnThemThiSinhMoi.setVisible(false);
+            btnSua.setVisible(false);
+            btnXoa.setVisible(false);
+            txtLoaiTK.setText("Người dùng");
+        }
+        else {
+            initComponents();
+            btnThemThiSinhMoi.setBackground(new Colors().getPrimaryColor());
+            btnSua.setBackground(new Colors().getWarning());
+            btnXoa.setBackground(new Colors().getDanger());
+            txtLoaiTK.setText("Quản trị viên");
+        }
+        txtTenTK.setText(data[1]);
         btnTatCaThiSinh.setBackground(new Colors().getPrimaryColor());
         btnA.setBackground(new Colors().getPrimaryColor());
         btnB.setBackground(new Colors().getPrimaryColor());
         btnC.setBackground(new Colors().getPrimaryColor());
         btnXemMonThi.setBackground(new Colors().getPrimaryColor());
-
-        btnThemThiSinhMoi.setBackground(new Colors().getPrimaryColor());
-        btnSua.setBackground(new Colors().getWarning());
-        btnXoa.setBackground(new Colors().getDanger());
 
         label.setForeground(new Colors().getPrimaryColor());
         
@@ -90,6 +104,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
         btnB = new javax.swing.JButton();
         btnTatCaThiSinh = new javax.swing.JButton();
         btnXemMonThi = new javax.swing.JButton();
+        btnExcel = new javax.swing.JButton();
         label = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
@@ -104,7 +119,6 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        btnExcel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nhóm 3 - Quản lý tuyển sinh");
@@ -152,6 +166,13 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
             }
         });
 
+        btnExcel.setText("Xuất ra Excel");
+        btnExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -163,7 +184,8 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
                     .addComponent(btnB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnTatCaThiSinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnXemMonThi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnXemMonThi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnExcel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -179,7 +201,9 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
                 .addComponent(btnC)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnXemMonThi)
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
+                .addComponent(btnExcel)
+                .addContainerGap())
         );
 
         label.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -247,13 +271,6 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
             }
         });
 
-        btnExcel.setText("Xuất ra Excel");
-        btnExcel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcelActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -267,8 +284,6 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnThemThiSinhMoi)
-                                .addGap(96, 96, 96)
-                                .addComponent(btnExcel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSua)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -329,8 +344,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnThemThiSinhMoi)
                             .addComponent(btnSua)
-                            .addComponent(btnXoa)
-                            .addComponent(btnExcel))))
+                            .addComponent(btnXoa))))
                 .addGap(21, 21, 21))
         );
 
@@ -340,7 +354,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     private void btnThemThiSinhMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemThiSinhMoiActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new ThemThiSinhMoiUI().setVisible(true);
+        new ThemThiSinhMoiUI(data).setVisible(true);
     }//GEN-LAST:event_btnThemThiSinhMoiActionPerformed
 
     public void sortByKhoi(String khoi) {
@@ -378,7 +392,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
         }
         else {
             this.dispose();
-            new SuaThongTinThiSinhUI(table.getValueAt(table.getSelectedRow(), 0).toString()).setVisible(true);
+            new SuaThongTinThiSinhUI(table.getValueAt(table.getSelectedRow(), 0).toString(), data).setVisible(true);
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
@@ -446,7 +460,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     private void btnXemMonThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemMonThiActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new XemMonThiUI().setVisible(true);
+        new XemMonThiUI(data).setVisible(true);
     }//GEN-LAST:event_btnXemMonThiActionPerformed
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed

@@ -19,13 +19,17 @@ import javax.swing.JOptionPane;
 public class ThemThiSinhMoiUI extends javax.swing.JFrame {
 
     PreparedStatement pst = null;
-    private String dataContructor;
+    public String[] data;
     /**
      * Creates new form ThemThiSinhMoiUI
      */
 
-    public ThemThiSinhMoiUI() {
+    public ThemThiSinhMoiUI(String[] data) {
+        this.data = data;
         initComponents();
+    }
+
+    public ThemThiSinhMoiUI() {
     }
 
     /**
@@ -190,7 +194,7 @@ public class ThemThiSinhMoiUI extends javax.swing.JFrame {
                         + "Ưu tiên: "+cbUuTien.getSelectedItem().toString()+"\n"
                         + "Khối: "+cbKhoi.getSelectedItem().toString()+"", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
-                new QLTS_Nhom3().setVisible(true);
+                new QLTS_Nhom3(data).setVisible(true);
             } catch (SQLException ex) {
                 Logger.getLogger(ThemThiSinhMoiUI.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(frame, "Số báo danh không đúng định dạng", "Thông báo", JOptionPane.ERROR_MESSAGE);
@@ -201,11 +205,7 @@ public class ThemThiSinhMoiUI extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        QLTS_Nhom3 qlts = new QLTS_Nhom3();
-        qlts.setVisible(true);
-        qlts.btnThemThiSinhMoi.setVisible(false);
-        qlts.btnSua.setVisible(false);
-        qlts.btnXoa.setVisible(false);
+        new QLTS_Nhom3(data).setVisible(true);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     /**

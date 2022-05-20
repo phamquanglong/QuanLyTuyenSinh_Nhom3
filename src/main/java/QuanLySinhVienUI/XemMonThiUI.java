@@ -18,6 +18,10 @@ public class XemMonThiUI extends javax.swing.JFrame {
 
     PreparedStatement pst = null;
     DefaultTableModel tableModel;
+    public String[] data;
+
+    public XemMonThiUI() {
+    }
     /**
      * Creates new form XemMonThiUI
      */
@@ -43,7 +47,8 @@ public class XemMonThiUI extends javax.swing.JFrame {
         }
     }
     
-    public XemMonThiUI() {
+    public XemMonThiUI(String[] data) {
+        this.data = data;
         initComponents();
         getMonByKhoi();
     }
@@ -142,11 +147,7 @@ public class XemMonThiUI extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        QLTS_Nhom3 qlts = new QLTS_Nhom3();
-        qlts.setVisible(true);
-        qlts.btnThemThiSinhMoi.setVisible(false);
-        qlts.btnSua.setVisible(false);
-        qlts.btnXoa.setVisible(false);
+        new QLTS_Nhom3(data).setVisible(true);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     /**
