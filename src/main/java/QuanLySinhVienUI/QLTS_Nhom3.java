@@ -32,7 +32,8 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     ArrayList<ThiSinh> alist;
     public String[] data;
     XSSFWorkbook wb = new XSSFWorkbook();
-    XSSFSheet sheet = wb.createSheet("Thí sinh");
+    XSSFSheet sheet;
+    XSSFSheet mainSheet = wb.createSheet("Thí sinh");
     XSSFSheet sheetA = wb.createSheet("Khối A");
     XSSFSheet sheetB = wb.createSheet("Khối B");
     XSSFSheet sheetC = wb.createSheet("Khối C");
@@ -464,6 +465,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
         // TODO add your handling code here:
         tableModel.setRowCount(0);
         getTatCaThiSinh();
+        sheet = mainSheet;
     }//GEN-LAST:event_btnTatCaThiSinhActionPerformed
 
     private void btnXemMonThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemMonThiActionPerformed
