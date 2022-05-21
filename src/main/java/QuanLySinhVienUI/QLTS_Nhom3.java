@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import Model.ThiSinh;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Vector;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -29,14 +30,15 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     PreparedStatement pst = null;
     JFrame frame = new JFrame();
     DefaultTableModel tableModel;
-    ArrayList<ThiSinh> alist;
+    ArrayList<ThiSinh> alist = new ArrayList<>();
     public String[] data;
-    XSSFWorkbook wb = new XSSFWorkbook();
-    XSSFSheet sheet;
-    XSSFSheet mainSheet = wb.createSheet("Thí sinh");
-    XSSFSheet sheetA = wb.createSheet("Khối A");
-    XSSFSheet sheetB = wb.createSheet("Khối B");
-    XSSFSheet sheetC = wb.createSheet("Khối C");
+//    XSSFWorkbook wb = new XSSFWorkbook();
+//    XSSFSheet sheet;
+//    XSSFSheet mainSheet = wb.sheet("Thí sinh");
+//    XSSFSheet sheetA = wb.createSheet("Khối A");
+//    XSSFSheet sheetB = wb.createSheet("Khối B");
+//    XSSFSheet sheetC = wb.createSheet("Khối C");
+    XSSFSheet[] exList;
     int tongSo;
     public QLTS_Nhom3() {
     }
@@ -44,21 +46,21 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     /**
      * Creates new form QLTS_Nhom3
      */
-    public void getTatCaThiSinh() {
-        alist = new ArrayList<>();
+    public void databaseToArrayList() {
+        alist.clear();
         try {
             Connection con = DBConnection.getConnection();
             String sql = "Select * from `thisinh`";
             pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
-            tableModel = (DefaultTableModel) table.getModel();
+            //tableModel = (DefaultTableModel) table.getModel();
             while (rs.next()) {
                 String SBD = rs.getString(1);
                 String hoTen = rs.getString(2);
                 String diaChi = rs.getString(3);
                 String uuTien = rs.getString(4);
                 String khoiThi = rs.getString(5);
-                tableModel.addRow(new Object[]{SBD, hoTen, diaChi, uuTien, khoiThi});
+                //tableModel.addRow(new Object[]{SBD, hoTen, diaChi, uuTien, khoiThi});
                 ThiSinh ts = new ThiSinh(SBD, hoTen, diaChi, uuTien, khoiThi);
                 alist.add(ts);
             }
@@ -67,7 +69,21 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
             Logger.getLogger(QLTS_Nhom3.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    public void ArrayListToTable(){
+        tableModel = (DefaultTableModel) table.getModel();
+        tableModel.setRowCount(0);
+        
+        for(int i=0; i<alist.size(); i++){
+            Vector v = new Vector();
+            v.add(alist.get(i).getSBD());
+            v.add(alist.get(i).getHoTen());
+            v.add(alist.get(i).getDiaChi());
+            v.add(alist.get(i).getUuTien());
+            v.add(alist.get(i).getKhoiThi());
+            tableModel.addRow(v);
+        }
+    }
     public QLTS_Nhom3(String[] data) {
         this.data = data;
         if (data[0].contains("user")) {
@@ -93,7 +109,8 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
 
         label.setForeground(new Colors().getPrimaryColor());
 
-        getTatCaThiSinh();
+        databaseToArrayList();
+        ArrayListToTable();
     }
 
     /**
@@ -366,13 +383,13 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
 
     public void sortByKhoi(String khoi) {
         alist = new ArrayList<>();
-        if (khoi.equals("Khối A")) sheet = sheetA;
-        else if (khoi.equals("Khối B")) sheet = sheetB;
-        else if (khoi.equals("Khối C")) sheet = sheetC;
+//        if (khoi.equals("Khối A")) sheet = sheetA;
+//        else if (khoi.equals("Khối B")) sheet = sheetB;
+//        else if (khoi.equals("Khối C")) sheet = sheetC;
         try {
             Connection con = DBConnection.getConnection();
-            tableModel.setRowCount(0);
-            tableModel = (DefaultTableModel) table.getModel();
+//            tableModel.setRowCount(0);
+//            tableModel = (DefaultTableModel) table.getModel();
             String sql = "Select * from thisinh where khoi = ?";
             pst = con.prepareStatement(sql);
             pst.setString(1, khoi);
@@ -383,7 +400,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
                 String diaChi = rs.getString(3);
                 String uuTien = rs.getString(4);
                 String khoiThi = rs.getString(5);
-                tableModel.addRow(new Object[]{SBD, hoTen, diaChi, uuTien, khoiThi});
+//                tableModel.addRow(new Object[]{SBD, hoTen, diaChi, uuTien, khoiThi});
                 ThiSinh ts = new ThiSinh(SBD, hoTen, diaChi, uuTien, khoiThi);
                 alist.add(ts);
             }
@@ -395,6 +412,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     private void btnAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAActionPerformed
         // TODO add your handling code here:
         sortByKhoi("Khối A");
+        ArrayListToTable();
     }//GEN-LAST:event_btnAActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -454,18 +472,21 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     private void btnBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBActionPerformed
         // TODO add your handling code here:
         sortByKhoi("Khối B");
+        ArrayListToTable();
     }//GEN-LAST:event_btnBActionPerformed
 
     private void btnCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCActionPerformed
         // TODO add your handling code here:
         sortByKhoi("Khối C");
+        ArrayListToTable();
     }//GEN-LAST:event_btnCActionPerformed
 
     private void btnTatCaThiSinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTatCaThiSinhActionPerformed
         // TODO add your handling code here:
         tableModel.setRowCount(0);
-        getTatCaThiSinh();
-        sheet = mainSheet;
+        databaseToArrayList();
+        ArrayListToTable();
+//        sheet = mainSheet;
     }//GEN-LAST:event_btnTatCaThiSinhActionPerformed
 
     private void btnXemMonThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemMonThiActionPerformed
@@ -496,6 +517,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
                     rs.getString(5)
                 });
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(QLTS_Nhom3.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -504,18 +526,16 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
         // TODO add your handling code here:
         search(txtSearch.getText());
     }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
-        // TODO add your handling code here:
+    private  void ListToExcel(XSSFWorkbook wb, XSSFSheet Sheet){
         try {
             int i;
             XSSFRow row = null;
             Cell cell = null;
-            row = sheet.createRow(2);
+            row = Sheet.createRow(2);
             cell = row.createCell(2, CellType.STRING);
             cell.setCellValue("Tổng số: " + alist.size());
 
-            row = sheet.createRow(3);
+            row = Sheet.createRow(3);
             //Header
             cell = row.createCell(0, CellType.STRING);
             cell.setCellValue("STT");
@@ -536,7 +556,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
             cell.setCellValue("Khối thi");
 
             for (i = 0; i < alist.size(); i++) {
-                row = sheet.createRow(4 + i);
+                row = Sheet.createRow(4 + i);
 
                 cell = row.createCell(0, CellType.NUMERIC);
                 cell.setCellValue(i + 1);
@@ -558,7 +578,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
 
             }
             float t =(float)alist.size()/tongSo*100;
-            row = sheet.createRow(5+i);
+            row = Sheet.createRow(5+i);
             cell = row.createCell(5, CellType.STRING);
             cell.setCellValue(t + "%");
             File f = new File("thisinh.xlsx");
@@ -570,11 +590,28 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
                 e.printStackTrace();
             }
 
-            JOptionPane.showMessageDialog(this, "Xuất file excel thành công");
+            
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Xuất file thất bại");
         }
+    }
+    private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
+        // TODO add your handling code here:
+        XSSFWorkbook wb = new XSSFWorkbook();
+        XSSFSheet sheet = wb.createSheet("Thí sinh");
+        databaseToArrayList();
+        ListToExcel(wb,sheet);
+        sheet = wb.createSheet("Khối A");
+        sortByKhoi("Khối A");
+        ListToExcel(wb,sheet);
+        sheet = wb.createSheet("Khối B");
+        sortByKhoi("Khối B");
+        ListToExcel(wb,sheet);
+        sheet = wb.createSheet("Khối C");
+        sortByKhoi("Khối C");
+        ListToExcel(wb,sheet);
+        JOptionPane.showMessageDialog(this, "Xuất file excel thành công");
+        
     }//GEN-LAST:event_btnExcelActionPerformed
 
     /**
