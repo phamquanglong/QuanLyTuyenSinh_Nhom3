@@ -176,6 +176,8 @@ public class ThemThiSinhMoiUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(frame, "Họ tên không được để trống", "Thông báo", JOptionPane.ERROR_MESSAGE);
         else if (txtDiaChi.getText().isEmpty())
             JOptionPane.showMessageDialog(frame, "Địa chỉ không được bỏ trống", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        else if (txtSoBaoDanh.getText().length() > 6)
+            JOptionPane.showMessageDialog(frame, "Số báo danh phải gồm 6 chữ số", "Thông báo", JOptionPane.ERROR_MESSAGE);
         else {
             try {
                 Connection con = DBConnection.getConnection();
