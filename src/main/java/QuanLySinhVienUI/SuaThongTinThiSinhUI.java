@@ -23,13 +23,14 @@ public class SuaThongTinThiSinhUI extends javax.swing.JFrame {
     private String dataContructor;
     public String[] data;
     PreparedStatement pst = null;
-    public SuaThongTinThiSinhUI(String dataContructor, String[] data){
+
+    public SuaThongTinThiSinhUI(String dataContructor, String[] data) {
         this.data = data;
         initComponents();
-        
+
         try {
             Connection con = DBConnection.getConnection();
-            String sql = "Select * from thisinh where SBD = "+dataContructor+"";
+            String sql = "Select * from thisinh where SBD = " + dataContructor + "";
             pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             this.dataContructor = dataContructor;
@@ -44,6 +45,7 @@ public class SuaThongTinThiSinhUI extends javax.swing.JFrame {
             Logger.getLogger(SuaThongTinThiSinhUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Creates new form SuaThongTinThiSinh
      */
@@ -206,19 +208,21 @@ public class SuaThongTinThiSinhUI extends javax.swing.JFrame {
                 pst.setString(4, cbKhoi.getSelectedItem().toString());
                 pst.setString(5, txtSoBaoDanh.getText());
                 pst.executeUpdate();
-                
+
                 JOptionPane.showMessageDialog(frame, "Sửa thông tin thí sinh thành công!!!\n"
-                    + "Số báo danh: "+txtSoBaoDanh.getText()+"\n"
-                    + "Họ tên: "+txtHoTen.getText()+"\n"
-                    + "Địa chỉ: "+txtDiaChi.getText()+"\n"
-                    + "Ưu tiên: "+cbUuTien.getSelectedItem().toString()+"\n"
-                    + "Khối: "+cbKhoi.getSelectedItem().toString()+"", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        + "Số báo danh: " + txtSoBaoDanh.getText() + "\n"
+                        + "Họ tên: " + txtHoTen.getText() + "\n"
+                        + "Địa chỉ: " + txtDiaChi.getText() + "\n"
+                        + "Ưu tiên: " + cbUuTien.getSelectedItem().toString() + "\n"
+                        + "Khối: " + cbKhoi.getSelectedItem().toString() + "", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             } catch (SQLException ex) {
                 Logger.getLogger(ThemThiSinhMoiUI.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             this.dispose();
-            new QLTS_Nhom3(data).setVisible(true);
+            QLTS_Nhom3 QLTS = new QLTS_Nhom3(data);
+            QLTS.setLocationRelativeTo(null);
+            QLTS.setVisible(true);
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
@@ -229,7 +233,9 @@ public class SuaThongTinThiSinhUI extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new QLTS_Nhom3(data).setVisible(true);
+        QLTS_Nhom3 QLTS = new QLTS_Nhom3(data);
+        QLTS.setLocationRelativeTo(null);
+        QLTS.setVisible(true);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     /**
@@ -264,7 +270,9 @@ public class SuaThongTinThiSinhUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new SuaThongTinThiSinhUI().setVisible(true);
+                SuaThongTinThiSinhUI suaThongTinThiSinhUI = new SuaThongTinThiSinhUI();
+                suaThongTinThiSinhUI.setLocationRelativeTo(null);
+                suaThongTinThiSinhUI.setVisible(true);
             }
         });
     }

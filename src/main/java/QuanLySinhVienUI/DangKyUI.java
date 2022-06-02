@@ -25,12 +25,13 @@ public class DangKyUI extends javax.swing.JFrame {
 
     Connection con = null;
     PreparedStatement pst = null;
+
     /**
      * Creates new form DangKyUI
      */
     public DangKyUI() {
         initComponents();
-        
+
         this.getContentPane().setBackground(new Colors().getBackColor());
         btnDangKy.setBackground(new Colors().getPrimaryColor());
         btnTroVeDangNhap.setBackground(new Colors().getPrimaryColor());
@@ -159,61 +160,68 @@ public class DangKyUI extends javax.swing.JFrame {
 
     private void btnTroVeDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTroVeDangNhapActionPerformed
         // TODO add your handling code here:
-        new DangNhapUI().setVisible(true);
+        DangNhapUI loginUI = new DangNhapUI();
+        loginUI.setLocationRelativeTo(null);
+        loginUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTroVeDangNhapActionPerformed
 
     JFrame frame = new JFrame();
     private void btnDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKyActionPerformed
         // TODO add your handling code here:
-        if (txtUserName.getText().isEmpty())
+        if (txtUserName.getText().isEmpty()) {
             JOptionPane.showMessageDialog(frame, "Tên người dùng không được bỏ trống", "Thông báo", JOptionPane.ERROR_MESSAGE);
-        else if (txtPassword.getPassword().length == 0)
+        } else if (txtPassword.getPassword().length == 0) {
             JOptionPane.showMessageDialog(frame, "Mật khẩu không được bỏ trống", "Thông báo", JOptionPane.ERROR_MESSAGE);
-        else if (txtConfirmPassword.getPassword().length == 0)
+        } else if (txtConfirmPassword.getPassword().length == 0) {
             JOptionPane.showMessageDialog(frame, "Xác nhận mật khẩu không được bỏ trống", "Thông báo", JOptionPane.ERROR_MESSAGE);
-        else {
-            if (txtPassword.getPassword().length < 7)
+        } else {
+            if (txtPassword.getPassword().length < 7) {
                 JOptionPane.showMessageDialog(frame, "Mật khẩu phải có tối thiểu 7 kí tự", "Thông báo", JOptionPane.ERROR_MESSAGE);
-            else if (!Arrays.equals(txtConfirmPassword.getPassword(), txtPassword.getPassword()))
+            } else if (!Arrays.equals(txtConfirmPassword.getPassword(), txtPassword.getPassword())) {
                 JOptionPane.showMessageDialog(frame, "Mật khẩu và xác nhận mật khẩu không trùng khớp", "Thông báo", JOptionPane.ERROR_MESSAGE);
-            else {
+            } else {
                 FileWriter fw = null;
                 BufferedWriter bw = null;
                 FileReader fr = null;
                 BufferedReader br = null;
                 try {
-                    fw = new FileWriter ("user.txt",true);
-                    bw = new BufferedWriter (fw);
+                    fw = new FileWriter("user.txt", true);
+                    bw = new BufferedWriter(fw);
                     fr = new FileReader("user.txt");
                     br = new BufferedReader(fr);
                     String userName = txtUserName.getText();
                     String check = null;
-                    while((check = br.readLine()) != null){
+                    while ((check = br.readLine()) != null) {
                         byte[] decodedBytes = Base64.getDecoder().decode(check);
                         String decodedString = new String(decodedBytes);
-                        String obj[] = decodedString.split("\\$");                  
-                        if ((obj[1].equals(userName))){
+                        String obj[] = decodedString.split("\\$");
+                        if ((obj[1].equals(userName))) {
                             JOptionPane.showMessageDialog(frame, "Tên đăng nhập đã tồn tại", "Thông báo", JOptionPane.ERROR_MESSAGE);
                             break;
                         }
-                    }   
-                    if (check == null){
+                    }
+                    if (check == null) {
                         String passWord = String.valueOf(txtPassword.getPassword());
                         String type;
-                        if(cbLoaiTK.getSelectedIndex() == 0) type = "admin";
-                        else type = "user";
-                        String temp = type+"$"+userName+"$"+passWord;
+                        if (cbLoaiTK.getSelectedIndex() == 0) {
+                            type = "admin";
+                        } else {
+                            type = "user";
+                        }
+                        String temp = type + "$" + userName + "$" + passWord;
                         String encodedString = Base64.getEncoder().encodeToString(temp.getBytes());
                         bw.append(encodedString);
                         bw.newLine();
                         JOptionPane.showMessageDialog(frame, "Đăng ký thành công!!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         this.dispose();
-                        new DangNhapUI().setVisible(true);
+                        DangNhapUI loginUI = new DangNhapUI();
+                        loginUI.setLocationRelativeTo(null);
+                        loginUI.setVisible(true);
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(frame, e);
-                }finally{
+                } finally {
                     try {
                         bw.close();
                         br.close();
@@ -225,7 +233,7 @@ public class DangKyUI extends javax.swing.JFrame {
                 }
             }
         }
-            
+
     }//GEN-LAST:event_btnDangKyActionPerformed
 
     private void txtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserNameActionPerformed
@@ -262,7 +270,9 @@ public class DangKyUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DangKyUI().setVisible(true);
+                DangKyUI signinUI = new DangKyUI();
+                signinUI.setLocationRelativeTo(null);
+                signinUI.setVisible(true);
             }
         });
     }

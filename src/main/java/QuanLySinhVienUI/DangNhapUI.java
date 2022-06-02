@@ -159,7 +159,7 @@ public class DangNhapUI extends javax.swing.JFrame {
         else {
             FileReader fr = null;
             BufferedReader br = null;
-            try {             
+            try {
                 fr = new FileReader("user.txt");
                 br = new BufferedReader(fr);
 
@@ -168,18 +168,20 @@ public class DangNhapUI extends javax.swing.JFrame {
                 String check = null;
                 while ((check = br.readLine()) != null) {
                     byte[] decodedBytes = Base64.getDecoder().decode(check);
-                        String decodedString = new String(decodedBytes);
-                        String obj[] = decodedString.split("\\$");
+                    String decodedString = new String(decodedBytes);
+                    String obj[] = decodedString.split("\\$");
                     if ((obj[1].equals(userName)) && (obj[2].equals(passWord))) {
                         QLTS_Nhom3 Cur = new QLTS_Nhom3(obj);
                         if (obj[0].equals("admin")) {
                             JOptionPane.showMessageDialog(frame, "Đăng nhập admin thành công!!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                             this.dispose();
+                            Cur.setLocationRelativeTo(null);
                             Cur.setVisible(true);
                             break;
                         } else {
                             JOptionPane.showMessageDialog(frame, "Đăng nhập user thành công!!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                             this.dispose();
+                            Cur.setLocationRelativeTo(null);
                             Cur.setVisible(true);
                             break;
                         }
@@ -205,7 +207,9 @@ public class DangNhapUI extends javax.swing.JFrame {
 
     private void btnDangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKyActionPerformed
         // TODO add your handling code here:
-        new DangKyUI().setVisible(true);
+        DangKyUI signinUI = new DangKyUI();
+        signinUI.setLocationRelativeTo(null);
+        signinUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnDangKyActionPerformed
 
@@ -247,7 +251,11 @@ public class DangNhapUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new DangNhapUI().setVisible(true);
+
+            DangNhapUI loginUI = new DangNhapUI();
+            loginUI.setLocationRelativeTo(null);
+            loginUI.setVisible(true);
+
         });
     }
 
