@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -188,8 +189,10 @@ public class DangKyUI extends javax.swing.JFrame {
                     br = new BufferedReader(fr);
                     String userName = txtUserName.getText();
                     String check = null;
-                    while((check = br.readLine()) != null){                  
-                        String obj[] = check.split("\\$");                  
+                    while((check = br.readLine()) != null){
+                        byte[] decodedBytes = Base64.getDecoder().decode(check);
+                        String decodedString = new String(decodedBytes);
+                        String obj[] = decodedString.split("\\$");                  
                         if ((obj[1].equals(userName))){
                             JOptionPane.showMessageDialog(frame, "Tên đăng nhập đã tồn tại", "Thông báo", JOptionPane.ERROR_MESSAGE);
                             break;
@@ -200,7 +203,9 @@ public class DangKyUI extends javax.swing.JFrame {
                         String type;
                         if(cbLoaiTK.getSelectedIndex() == 0) type = "admin";
                         else type = "user";
-                        bw.append(type+"$"+userName+"$"+passWord);
+                        String temp = type+"$"+userName+"$"+passWord;
+                        String encodedString = Base64.getEncoder().encodeToString(temp.getBytes());
+                        bw.append(encodedString);
                         bw.newLine();
                         JOptionPane.showMessageDialog(frame, "Đăng ký thành công!!!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         this.dispose();

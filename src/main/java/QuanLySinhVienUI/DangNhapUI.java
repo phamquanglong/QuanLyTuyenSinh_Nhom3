@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -166,7 +167,9 @@ public class DangNhapUI extends javax.swing.JFrame {
                 String passWord = String.valueOf(txtPassword.getPassword());
                 String check = null;
                 while ((check = br.readLine()) != null) {
-                    String obj[] = check.split("\\$");
+                    byte[] decodedBytes = Base64.getDecoder().decode(check);
+                        String decodedString = new String(decodedBytes);
+                        String obj[] = decodedString.split("\\$");
                     if ((obj[1].equals(userName)) && (obj[2].equals(passWord))) {
                         QLTS_Nhom3 Cur = new QLTS_Nhom3(obj);
                         if (obj[0].equals("admin")) {
