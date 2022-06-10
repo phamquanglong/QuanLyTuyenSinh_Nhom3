@@ -20,14 +20,20 @@ public class ThemThiSinhMoiUI extends javax.swing.JFrame {
 
     PreparedStatement pst = null;
     public String[] data;
+
     /**
      * Creates new form ThemThiSinhMoiUI
      */
 
     public ThemThiSinhMoiUI(String[] data) {
         this.data = data;
+        this.setLocationRelativeTo(null);
         initComponents();
+<<<<<<< HEAD
         if(data[0].contains("user")){
+=======
+        if (data[0].contains("user")) {
+>>>>>>> NhatMinh
             label.setText("Đăng ký dự thi");
             btnThemThiSinh.setText("Đăng ký");
         }
@@ -194,11 +200,11 @@ public class ThemThiSinhMoiUI extends javax.swing.JFrame {
                 pst.setString(5, cbKhoi.getSelectedItem().toString());
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(frame, "Thêm thí sinh mới thành công!!!\n"
-                        + "Số báo danh: "+txtSoBaoDanh.getText()+"\n"
-                        + "Họ tên: "+txtHoTen.getText()+"\n"
-                        + "Địa chỉ: "+txtDiaChi.getText()+"\n"
-                        + "Ưu tiên: "+cbUuTien.getSelectedItem().toString()+"\n"
-                        + "Khối: "+cbKhoi.getSelectedItem().toString()+"", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        + "Số báo danh: " + txtSoBaoDanh.getText() + "\n"
+                        + "Họ tên: " + txtHoTen.getText() + "\n"
+                        + "Địa chỉ: " + txtDiaChi.getText() + "\n"
+                        + "Ưu tiên: " + cbUuTien.getSelectedItem().toString() + "\n"
+                        + "Khối: " + cbKhoi.getSelectedItem().toString() + "", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
                 new QLTS_Nhom3(data).setVisible(true);
             } catch (SQLException ex) {
@@ -211,7 +217,9 @@ public class ThemThiSinhMoiUI extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new QLTS_Nhom3(data).setVisible(true);
+        QLTS_Nhom3 QLTS = new QLTS_Nhom3(data);
+        QLTS.setLocationRelativeTo(null);
+        QLTS.setVisible(true);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     /**
@@ -244,7 +252,9 @@ public class ThemThiSinhMoiUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThemThiSinhMoiUI().setVisible(true);
+                ThemThiSinhMoiUI themThiSinhMoiUI = new ThemThiSinhMoiUI();
+                themThiSinhMoiUI.setLocationRelativeTo(null);
+                themThiSinhMoiUI.setVisible(true);
             }
         });
     }

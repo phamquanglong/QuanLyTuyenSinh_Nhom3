@@ -14,6 +14,8 @@ import QuanLySinhVienUI.DangNhapUI;
 public class QuanLyTuyenSinh_Nhom3 {
 
     public static void main(String[] args) {
-        new DangNhapUI().setVisible(true);
+        DangNhapUI loginUI = new DangNhapUI();
+        loginUI.setLocationRelativeTo(null);
+        loginUI.setVisible(true);
     }
 }

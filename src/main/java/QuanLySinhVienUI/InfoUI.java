@@ -14,6 +14,7 @@ public class InfoUI extends javax.swing.JFrame {
      * Creates new form InfoUI
      */
     public String[] data;
+
     public InfoUI(String[] data) {
         initComponents();
         this.data = data;
@@ -22,7 +23,7 @@ public class InfoUI extends javax.swing.JFrame {
     }
 
     private InfoUI() {
-        
+
     }
 
     /**
@@ -49,6 +50,7 @@ public class InfoUI extends javax.swing.JFrame {
         labelNhom = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Thông tin chương trình");
 
         label.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         label.setText("Thông tin chương trình");
@@ -154,7 +156,9 @@ public class InfoUI extends javax.swing.JFrame {
 
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
-        new QLTS_Nhom3(data).setVisible(true);
+        QLTS_Nhom3 QLTS = new QLTS_Nhom3(data);
+        QLTS.setLocationRelativeTo(null);
+        QLTS.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnThoatActionPerformed
 
@@ -188,7 +192,9 @@ public class InfoUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InfoUI().setVisible(true);
+                InfoUI infoUI = new InfoUI();
+                infoUI.setLocationRelativeTo(null);
+                infoUI.setVisible(true);
             }
         });
     }
