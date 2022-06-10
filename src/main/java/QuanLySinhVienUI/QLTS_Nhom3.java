@@ -368,9 +368,9 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnThemThiSinhMoi)
-                                .addGap(50, 50, 50)
-                                .addComponent(btnDangKyDuThi)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDangKyDuThi)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSua)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnXoa))
@@ -757,9 +757,6 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     private void btnDangKyDuThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKyDuThiActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new ThemThiSinhMoiUI(data).setVisible(true);
-    }                                              
-
         ThemThiSinhMoiUI themThiSinhMoiUI = new ThemThiSinhMoiUI(data);
         themThiSinhMoiUI.setLocationRelativeTo(null);
         themThiSinhMoiUI.setVisible(true);
@@ -770,8 +767,6 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
         this.dispose();
         new QuanLyTaiKhoanUI(data).setVisible(true);
     }//GEN-LAST:event_btnQuanLyTaiKhoanActionPerformed
-
->>>>>>> NhatMinh
     /**
      * @param args the command line arguments
      */
