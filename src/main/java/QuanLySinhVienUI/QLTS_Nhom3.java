@@ -96,10 +96,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
             btnXoa.setVisible(false);
             txtLoaiTK.setText("Người dùng");
             btnExcel.setVisible(false);
-<<<<<<< HEAD
-=======
             btnQuanLyTaiKhoan.setVisible(false);
->>>>>>> NhatMinh
             btnDangKyDuThi.setBackground(new Colors().getPrimaryColor());
         } else {
             initComponents();
@@ -108,10 +105,8 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
             btnXoa.setBackground(new Colors().getDanger());
             txtLoaiTK.setText("Quản trị viên");
             btnDangKyDuThi.setVisible(false);
-<<<<<<< HEAD
-=======
+
             btnQuanLyTaiKhoan.setBackground(new Colors().getPrimaryColor());
->>>>>>> NhatMinh
         }
         txtTenTK.setText(data[1]);
 
@@ -376,8 +371,6 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
                                 .addGap(50, 50, 50)
                                 .addComponent(btnDangKyDuThi)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDangKyDuThi)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSua)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnXoa))
@@ -764,11 +757,9 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     private void btnDangKyDuThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKyDuThiActionPerformed
         // TODO add your handling code here:
         this.dispose();
-<<<<<<< HEAD
         new ThemThiSinhMoiUI(data).setVisible(true);
-    }//GEN-LAST:event_btnDangKyDuThiActionPerformed
+    }                                              
 
-=======
         ThemThiSinhMoiUI themThiSinhMoiUI = new ThemThiSinhMoiUI(data);
         themThiSinhMoiUI.setLocationRelativeTo(null);
         themThiSinhMoiUI.setVisible(true);
