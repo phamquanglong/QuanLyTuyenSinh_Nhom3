@@ -147,7 +147,9 @@ public class XemMonThiUI extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new QLTS_Nhom3(data).setVisible(true);
+        QLTS_Nhom3 QLTS = new QLTS_Nhom3(data);
+        QLTS.setLocationRelativeTo(null);
+        QLTS.setVisible(true);
     }//GEN-LAST:event_btnThoatActionPerformed
 
     /**
@@ -180,7 +182,9 @@ public class XemMonThiUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new XemMonThiUI().setVisible(true);
+                XemMonThiUI xemMonThiUI = new XemMonThiUI();
+                xemMonThiUI.setLocationRelativeTo(null);
+                xemMonThiUI.setVisible(true);
             }
         });
     }
