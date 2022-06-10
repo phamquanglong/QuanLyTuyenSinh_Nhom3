@@ -94,12 +94,14 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
             btnXoa.setVisible(false);
             txtLoaiTK.setText("Người dùng");
             btnExcel.setVisible(false);
+            btnDangKyDuThi.setBackground(new Colors().getPrimaryColor());
         } else {
             initComponents();
             btnThemThiSinhMoi.setBackground(new Colors().getPrimaryColor());
             btnSua.setBackground(new Colors().getWarning());
             btnXoa.setBackground(new Colors().getDanger());
             txtLoaiTK.setText("Quản trị viên");
+            btnDangKyDuThi.setVisible(false);
         }
         txtTenTK.setText(data[1]);
 
@@ -149,6 +151,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
         btnSearch = new javax.swing.JButton();
         cbSapXep = new javax.swing.JComboBox<>();
         btnInfo = new javax.swing.JButton();
+        btnDangKyDuThi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nhóm 3 - Quản lý tuyển sinh");
@@ -326,6 +329,14 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
             }
         });
 
+        btnDangKyDuThi.setForeground(new java.awt.Color(255, 255, 255));
+        btnDangKyDuThi.setText("Đăng ký dự thi");
+        btnDangKyDuThi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDangKyDuThiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -339,6 +350,8 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnThemThiSinhMoi)
+                                .addGap(50, 50, 50)
+                                .addComponent(btnDangKyDuThi)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSua)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -412,7 +425,8 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnThemThiSinhMoi)
                             .addComponent(btnSua)
-                            .addComponent(btnXoa))))
+                            .addComponent(btnXoa)
+                            .addComponent(btnDangKyDuThi))))
                 .addGap(21, 21, 21))
         );
 
@@ -713,6 +727,12 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnInfoActionPerformed
 
+    private void btnDangKyDuThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangKyDuThiActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new ThemThiSinhMoiUI(data).setVisible(true);
+    }//GEN-LAST:event_btnDangKyDuThiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -753,6 +773,7 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     private javax.swing.JButton btnB;
     private javax.swing.JButton btnC;
     private javax.swing.JButton btnD;
+    private javax.swing.JButton btnDangKyDuThi;
     private javax.swing.JButton btnExcel;
     private javax.swing.JButton btnInfo;
     private javax.swing.JButton btnSearch;

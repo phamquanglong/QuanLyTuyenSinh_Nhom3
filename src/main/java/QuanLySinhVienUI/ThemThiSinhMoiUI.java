@@ -27,6 +27,10 @@ public class ThemThiSinhMoiUI extends javax.swing.JFrame {
     public ThemThiSinhMoiUI(String[] data) {
         this.data = data;
         initComponents();
+        if(data[0].contains("user")){
+            label.setText("Đăng ký dự thi");
+            btnThemThiSinh.setText("Đăng ký");
+        }
     }
 
     public ThemThiSinhMoiUI() {
