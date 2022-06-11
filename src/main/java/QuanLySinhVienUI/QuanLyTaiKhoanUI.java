@@ -175,9 +175,13 @@ public class QuanLyTaiKhoanUI extends javax.swing.JFrame {
         if (table.getSelectedRows().length == 0) {
             JOptionPane.showMessageDialog(frame, "Chọn tài khoản cần xoá", "Thông báo", JOptionPane.ERROR_MESSAGE);
         } else {
-            tkList.remove(table.getSelectedRow());
-        updateFile(tkList);
-        loadTable();
+            int click = JOptionPane.showConfirmDialog(frame, "Bạn có chắc muốn xoá tài khoản " + table.getValueAt(table.getSelectedRow(), 1).toString() + " không?", "Thông báo", JOptionPane.YES_NO_OPTION);
+            if (click == JOptionPane.YES_OPTION)
+            {
+                tkList.remove(table.getSelectedRow());
+                updateFile(tkList);
+                loadTable();
+            }
         }
         
     }//GEN-LAST:event_btnXoaActionPerformed
