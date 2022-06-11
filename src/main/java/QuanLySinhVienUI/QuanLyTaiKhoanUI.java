@@ -4,6 +4,22 @@
  */
 package QuanLySinhVienUI;
 
+import Model.TaiKhoan;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author phamquanglong51
@@ -13,7 +29,10 @@ public class QuanLyTaiKhoanUI extends javax.swing.JFrame {
     /**
      * Creates new form QuanLyTaiKhoanUI
      */
+    JFrame frame = new JFrame();
     public String[] data;
+    ArrayList<TaiKhoan> tkList = new ArrayList<>();
+    DefaultTableModel tableModel;
     public QuanLyTaiKhoanUI(String[] data) {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -21,11 +40,16 @@ public class QuanLyTaiKhoanUI extends javax.swing.JFrame {
         btnXoa.setBackground(new Colors().getDanger());
         btnThayDoiQuyenTruyCap.setBackground(new Colors().getWarning());
         this.data = data;
-    }
-    
-    public QuanLyTaiKhoanUI() {
+        loadTable();
     }
 
+    public QuanLyTaiKhoanUI() {
+        
+    }
+    public void loadTable(){
+        fileToArray();
+        ArrayListToTable();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,7 +62,7 @@ public class QuanLyTaiKhoanUI extends javax.swing.JFrame {
         label = new javax.swing.JLabel();
         btnThoat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         btnXoa = new javax.swing.JButton();
         btnThayDoiQuyenTruyCap = new javax.swing.JButton();
 
@@ -55,21 +79,31 @@ public class QuanLyTaiKhoanUI extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã tài khoản", "Tên tài khoản", "Quyền truy cập"
+                "Quyền truy cập", "Tên tài khoản"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(table);
 
         btnXoa.setForeground(new java.awt.Color(255, 255, 255));
         btnXoa.setText("Xoá");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnThayDoiQuyenTruyCap.setForeground(new java.awt.Color(255, 255, 255));
         btnThayDoiQuyenTruyCap.setText("Thay đổi quyền truy cập");
+        btnThayDoiQuyenTruyCap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThayDoiQuyenTruyCapActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,6 +153,103 @@ public class QuanLyTaiKhoanUI extends javax.swing.JFrame {
         new QLTS_Nhom3(data).setVisible(true);
     }//GEN-LAST:event_btnThoatActionPerformed
 
+    private void btnThayDoiQuyenTruyCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThayDoiQuyenTruyCapActionPerformed
+        // TODO add your handling code here:
+        if (table.getSelectedRows().length == 0) {
+            JOptionPane.showMessageDialog(frame, "Chọn thí sinh cần sửa", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String typeSelected = table.getValueAt(table.getSelectedRow(), 0).toString();
+            if (typeSelected.equals("user")) {
+                tkList.get(table.getSelectedRow()).setType("admin");
+            } else {
+                tkList.get(table.getSelectedRow()).setType("user");
+            }
+            updateFile(tkList);
+            loadTable();
+        }
+        
+    }//GEN-LAST:event_btnThayDoiQuyenTruyCapActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        if (table.getSelectedRows().length == 0) {
+            JOptionPane.showMessageDialog(frame, "Chọn tài khoản cần xoá", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        } else {
+            tkList.remove(table.getSelectedRow());
+        updateFile(tkList);
+        loadTable();
+        }
+        
+    }//GEN-LAST:event_btnXoaActionPerformed
+    public void updateFile(ArrayList<TaiKhoan> alist){
+          FileWriter fw = null;
+                BufferedWriter bw = null;
+                FileReader fr = null;
+                BufferedReader br = null;
+                try {
+                    fw = new FileWriter("user.txt");
+                    bw = new BufferedWriter(fw);
+                    fr = new FileReader("user.txt");
+                    br = new BufferedReader(fr);
+                    for (int i = 0; i < tkList.size(); i++) {
+                        String temp = alist.get(i).getType() + "$" + alist.get(i).getUserName()+ "$" + alist.get(i).getPassWord();
+                        String encodedString = Base64.getEncoder().encodeToString(temp.getBytes());
+                        bw.append(encodedString);
+                        bw.newLine();
+                    }
+                        
+                   
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(frame, e);
+                } finally {
+                    try {
+                        bw.close();
+                        br.close();
+                        fw.close();
+                        fr.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(QuanLyTaiKhoanUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+    }
+    public void fileToArray() {
+        tkList.clear();
+        int i=0;
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            fr = new FileReader("user.txt");
+            br = new BufferedReader(fr);
+            String check = null;
+            while ((check = br.readLine()) != null) {
+                byte[] decodedBytes = Base64.getDecoder().decode(check);
+                String decodedString = new String(decodedBytes);
+                String obj[] = decodedString.split("\\$");
+                TaiKhoan tk = new TaiKhoan(obj[0],obj[1],obj[2]);
+                tkList.add(tk);
+            }
+        } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                try {
+                    br.close();
+                    fr.close();
+                } catch (IOException ex) {
+
+                }
+            }
+    }
+    public void ArrayListToTable() {
+        tableModel = (DefaultTableModel) table.getModel();
+        tableModel.setRowCount(0);
+
+        for (int i = 0; i < tkList.size(); i++) {
+            Vector v = new Vector();
+            v.add(tkList.get(i).getType());
+            v.add(tkList.get(i).getUserName());
+            tableModel.addRow(v);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -159,7 +290,7 @@ public class QuanLyTaiKhoanUI extends javax.swing.JFrame {
     private javax.swing.JButton btnThoat;
     private javax.swing.JButton btnXoa;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel label;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

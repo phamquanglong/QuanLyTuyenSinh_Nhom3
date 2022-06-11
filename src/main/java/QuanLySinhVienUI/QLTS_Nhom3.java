@@ -765,7 +765,9 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
     private void btnQuanLyTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyTaiKhoanActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new QuanLyTaiKhoanUI(data).setVisible(true);
+        QuanLyTaiKhoanUI qltk = new QuanLyTaiKhoanUI(data);
+        qltk.setLocationRelativeTo(null);
+        qltk.setVisible(true);
     }//GEN-LAST:event_btnQuanLyTaiKhoanActionPerformed
     /**
      * @param args the command line arguments
