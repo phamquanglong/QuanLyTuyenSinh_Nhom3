@@ -758,20 +758,16 @@ public class QLTS_Nhom3 extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
         new ThemThiSinhMoiUI(data).setVisible(true);
-    }                                              
-
-        ThemThiSinhMoiUI themThiSinhMoiUI = new ThemThiSinhMoiUI(data);
-        themThiSinhMoiUI.setLocationRelativeTo(null);
-        themThiSinhMoiUI.setVisible(true);
     }//GEN-LAST:event_btnDangKyDuThiActionPerformed
 
     private void btnQuanLyTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuanLyTaiKhoanActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new QuanLyTaiKhoanUI(data).setVisible(true);
+        ThemThiSinhMoiUI themThiSinhMoiUI = new ThemThiSinhMoiUI(data);
+        themThiSinhMoiUI.setLocationRelativeTo(null);
+        themThiSinhMoiUI.setVisible(true);
     }//GEN-LAST:event_btnQuanLyTaiKhoanActionPerformed
 
->>>>>>> NhatMinh
     /**
      * @param args the command line arguments
      */

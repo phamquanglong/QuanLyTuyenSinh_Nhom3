@@ -29,11 +29,7 @@ public class ThemThiSinhMoiUI extends javax.swing.JFrame {
         this.data = data;
         this.setLocationRelativeTo(null);
         initComponents();
-<<<<<<< HEAD
-        if(data[0].contains("user")){
-=======
         if (data[0].contains("user")) {
->>>>>>> NhatMinh
             label.setText("Đăng ký dự thi");
             btnThemThiSinh.setText("Đăng ký");
         }
